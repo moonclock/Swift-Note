@@ -1,0 +1,55 @@
+# **swfit** 学习笔记
+
+## 一 数值类型
+
+1.类型别名 typealias, 为一个已知类型定义一个别名, typealias AudioSample = UInt8
+
+2.在判断类型 ,布尔类型必须明确(if i == ture, if i 是无效的)
+
+3.元组在初始化的时候可以进行类型指定 var error:(errorCode: Int, errorMessage:Any) = (errorCode: 1, errorMeassage: “没有权限”)
+
+4.字符串中利用indices属性可以获得所有字符的索引值
+
+
+##二 运算符
+
+1.0 != nil
+
+2.合并控制运算符(??) 相当于三元运算符作用于Optional的缩写 a!=nil ? a! : b
+
+3.运算符是可以重载的, 分为:
+
+- 二元运算重载, 如加减法
+
+- 一元运算重载, 如正负号, 定义时, 使用 prefix 声明它为前缀
+
+- 组合运算符重载, += 需要在左参数需要为 inout 类型
+
+```swift
+extension Vector2D {
+    static prefix func -(vector: Vector2D) -> Vector2D {
+        return Vector2D(x: -vector.x, y: -vector.y);
+    }
+
+    static func +(left: Vector2D, right: Vector2D) -> Vector2D {
+        return Vector2D(x: left.x + right.x, y: left.y + right.y)
+    }
+    
+    static func +=(left: inout Vector2D, right: Vector2D) {
+        left = left + right
+    }
+}
+```
+
+- 等价运算符必须遵守 Equatable 协议(存储型类的结构体,  枚举会自动合成实现)
+
+```swift
+extension Vector2D: Equatable {
+    static func == (left: Vector2D, right: Vector2D) -> Bool {
+        return (left.x == right.x) && (left.y == right.y)
+    }
+}
+```
+
+4.自定义运算符
+
