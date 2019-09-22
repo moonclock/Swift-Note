@@ -11,6 +11,8 @@
 4.字符串中利用indices属性可以获得所有字符的索引值
 
 
+
+
 ##二 运算符
 
 1.0 != nil
@@ -53,3 +55,29 @@ extension Vector2D: Equatable {
 
 4.自定义运算符
 
+
+
+## 流程控制
+
+1. forin 循环
+   - 字典的forin循环, 可以直接获得元组
+   ```swift
+   let numberOfLegs = ["spider": 8, "ant": 6, "cat": 4]
+   for (animalName, legCount) in numberOfLegs {
+    print("\(animalName) has \(legCount) legs")
+    }
+   ```
+
+   
+   
+   - 不需要的值可以直接用 _ 去忽略
+   ```swift
+   for _ in numberOfLegs {
+    print(numberOfLegs)
+    }
+   ```
+   
+2. switch
+
+   - 在匹配到第一个case, 执行完毕后退出, 不需要显式的指明break.
+   - 一个case中匹配多个值可以用 逗号 分隔, 并且可以写出多行
