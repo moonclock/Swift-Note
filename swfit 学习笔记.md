@@ -79,5 +79,25 @@ extension Vector2D: Equatable {
    
 2. switch
 
-   - 在匹配到第一个case, 执行完毕后退出, 不需要显式的指明break.
+   - 在匹配到第一个case, 执行完毕后退出, 不需要显式的指明break. 如果想要C 风格的贯穿行为, 需要在该 case 后面使用 fallthrough (会按顺序继续运行，且不论条件是否满足都会执行。)
+
    - 一个case中匹配多个值可以用 逗号 分隔, 并且可以写出多行
+
+   - case 中支持区间匹配  ( case 6...12: )
+
+   - 支持值绑定, 并且支持 where
+
+     ```swift
+     let point = (1, -1)
+     
+     switch point {
+     case(let x, let y) where x == y:
+         print("point x = y")
+     case(let x, let y) where x == -y:
+         print("point x = -y")
+     default:
+         print("other")
+     }
+     ```
+
+     
