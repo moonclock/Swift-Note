@@ -100,4 +100,10 @@ extension Vector2D: Equatable {
      }
      ```
 
-     
+3. guard
+
+   guard 总是有个 else, 执行顺序如图:
+
+   ![image-20190923130217953](/Users/john/Desktop/swift/Swift-Note/img/image-20190923130217953.png)
+
+   
