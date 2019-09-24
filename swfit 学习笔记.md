@@ -1,5 +1,7 @@
 # **swfit** 学习笔记
 
+
+
 ## 一 数值类型
 
 1.类型别名 typealias, 为一个已知类型定义一个别名, typealias AudioSample = UInt8
@@ -203,4 +205,25 @@ for case let number? in arrOfOptionalInts {
       print("什么")
   }
   ```
+
+
+
+## 集合
+
+1.数组
+
+- 初始化语法, 需要明确指定/推导出数组存储的数据类型
+
+  ```swift
+  let array: Array<Int> = []
+  
+  let array1 = [1, 2, 3, 4, 5]
+  
+  let array2 = Array(1...9)
+  
+  let persons = ["zhangsan": 12, "lisi":13, "wangwu":14]
+  let names = Array(persons.keys)
+  ```
+
+  明确初始化数组后, 后续数组类型就可以推导, 使用时就不需要指定类型
 
