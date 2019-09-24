@@ -108,51 +108,99 @@ extension Vector2D: Equatable {
 
 
 
+##模式匹配
 
-## 模式匹配
+模式: 代表单个值或者复合值的结构
 
-1.表达式模式
-
-只出现在 switch 的 case 标签中, 
-
-2.类型转换模式
+1.可选项模式, 匹配 some(Wrapped) 中包装的值, 如: eg1; 且为 forin 提供便利迭代方式, 只为非 nil 元素指向循环体, 如:eg2
 
 ```swift
+eg1:
+let someOptional: Int? = 42
 
-protocol Animal {
-    var name: String { get }
+if case .some(let x) = someOptional {
+    print(x)
 }
 
-struct Dog: Animal {
-    var name: String {
-        return "dog"
-    }
-    
-    var runSpeed: Int
-}
+eg2:
+let arrOfOptionalInts: [Int?] = [1, nil, 2, 3, nil, nil, 4]
 
-struct Fish: Animal {
-    var name: String {
-        return "fish"
-    }
-    
-    var depth : Int
-}
-
-let animals: [Any] = [Dog(runSpeed: 20), Fish(depth: 800), Fish(depth: 20)]
-
-for animal in animals {
-    switch animal {
-        
-    case let dog as Dog:
-        print("\(dog.name) run at \(dog.runSpeed)")
-        
-    case is Fish:
-        print("Fish")
-        
-    default:
-        break
-    }
+for case let number? in arrOfOptionalInts {
+    print(number)
 }
 ```
+
+2.类型转换模式(is, as)
+
+- is 模式仅当一个值的类型在运行时和 is 模式右边的指定类型一致，或者是其子类的情况下，才会匹配这个值。is 模式和 is 运算符有相似表现，它们都进行类型转换，但是 is 模式没有返回类型。
+
+- as 模式仅当一个值的类型在运行时和 as 模式右边的指定类型一致，或者是其子类的情况下，才会匹配这个值。如果匹配成功，返回被转换成右边指定类型后的值。
+
+  ```swift
+  
+  protocol Animal {
+      var name: String { get }
+  }
+  
+  struct Dog: Animal {
+      var name: String {
+          return "dog"
+      }
+      
+      var runSpeed: Int
+  }
+  
+  struct Fish: Animal {
+      var name: String {
+          return "fish"
+      }
+      
+      var depth : Int
+  }
+  
+  let animals: [Any] = [Dog(runSpeed: 20), Fish(depth: 800), Fish(depth: 20)]
+  
+  for animal in animals {
+      switch animal {
+          
+      case let dog as Dog:
+          print("\(dog.name) run at \(dog.runSpeed)")
+          
+      case is Fish:
+          print("Fish")
+          
+      default:
+          break
+      }
+  }
+  ```
+
+3.表达式模式
+
+- 只出现在 switch 的 case 标签中, 利用 ~= 运算符与输入表达式进行值比较
+
+- 自定义类型默认无法进行表达式模式匹配, 需要重载 ~= 
+
+  ```swift
+  struct Employee {
+      var salary: Float
+}
+  
+  let money = Employee(salary: 2300)
+  
+  func ~= (lhs: ClosedRange<Float>, rhs: Employee) -> Bool {
+      return lhs.contains(rhs.salary)
+  }
+  
+  switch money {
+  case 0...1000:
+      print("1000以下")
+  case 1000...2000:
+      print("1000...2000")
+  case 2000...3000:
+      print("2000-3000")
+  default:
+      print("什么")
+  }
+  ```
 
