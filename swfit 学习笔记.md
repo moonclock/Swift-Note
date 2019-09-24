@@ -106,4 +106,53 @@ extension Vector2D: Equatable {
 
    ![image-20190923130217953](/Users/john/Desktop/swift/Swift-Note/img/image-20190923130217953.png)
 
-   
+
+
+
+## 模式匹配
+
+1.表达式模式
+
+只出现在 switch 的 case 标签中, 
+
+2.类型转换模式
+
+```swift
+
+protocol Animal {
+    var name: String { get }
+}
+
+struct Dog: Animal {
+    var name: String {
+        return "dog"
+    }
+    
+    var runSpeed: Int
+}
+
+struct Fish: Animal {
+    var name: String {
+        return "fish"
+    }
+    
+    var depth : Int
+}
+
+let animals: [Any] = [Dog(runSpeed: 20), Fish(depth: 800), Fish(depth: 20)]
+
+for animal in animals {
+    switch animal {
+        
+    case let dog as Dog:
+        print("\(dog.name) run at \(dog.runSpeed)")
+        
+    case is Fish:
+        print("Fish")
+        
+    default:
+        break
+    }
+}
+```
+
