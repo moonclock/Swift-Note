@@ -212,7 +212,7 @@ for case let number? in arrOfOptionalInts {
 
 1.数组
 
-- 初始化语法, 需要明确指定/推导出数组存储的数据类型
+- 初始化语法, 需要明确指定/推导出数组存储的数据类型, 明确初始化数组后, 后续数组类型就可以推导, 使用时不需要指定类型
 
   ```swift
   let array: Array<Int> = []
@@ -225,5 +225,4 @@ for case let number? in arrOfOptionalInts {
   let names = Array(persons.keys)
   ```
 
-  明确初始化数组后, 后续数组类型就可以推导, 使用时就不需要指定类型
 
