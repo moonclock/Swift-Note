@@ -210,19 +210,41 @@ for case let number? in arrOfOptionalInts {
 
 ## 集合
 
-1.数组
+### 数组
 
-- 初始化语法, 需要明确指定/推导出数组存储的数据类型, 明确初始化数组后, 后续数组类型就可以推导, 使用时不需要指定类型
+初始化语法, 需要明确指定/推导出数组存储的数据类型, 明确初始化数组后, 后续数组类型就可以推导, 使用时不需要指定类型.
 
-  ```swift
-  let array: Array<Int> = []
-  
-  let array1 = [1, 2, 3, 4, 5]
-  
-  let array2 = Array(1...9)
-  
-  let persons = ["zhangsan": 12, "lisi":13, "wangwu":14]
-  let names = Array(persons.keys)
-  ```
+```swift
+let array: Array<Int> = []
 
+let array1 = [1, 2, 3, 4, 5]
+
+let array2 = Array(1...9)
+
+let persons = ["zhangsan": 12, "lisi":13, "wangwu":14]
+let names = Array(persons.keys)
+```
+
+数组的遍历
+
+1. 类型
+   - forin
+   - forEach, 无法使用 break, continue 控制循环, return 只能退出当前一次循环执行体
+
+2. 遍历时, 利用 enumerated() 获得索引和值
+
+```swift
+let numbers = [1, 2, 3]
+
+// 同时获取索引和值
+for (index, num) in numbers.enumerated() {
+    print("\(index) --- \(num)")
+}
+
+// 单独获取索引
+for index in numbers.indices {
+    print("\(index)")
+}
+
+```
 
